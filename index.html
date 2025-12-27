@@ -3,47 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Mood Calendar</title>
+    <title>Mood Calendar</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="layout">
     <div class="left-panel">
-        <h2 class="side-title">Mood Entry</h2>
-        <div id="editor-section">
+        <h1 class="title">Mood Info</h1>
+        <div id="editor-section" class="editor-area">
             <p class="selected-date-label">Date: <span id="displayDate">Select a day</span></p>
             
-            <div class="input-group">
-                <p class="label">How are you feeling?</p>
+            <div class="mood-selector">
+                <p>How are you feeling?</p>
                 <div id="emojiOptions" class="emoji-grid">
                     </div>
             </div>
 
-            <div class="input-group">
-                <p class="label">Stress Level: <span id="stressVal">5</span></p>
+            <div class="stress-selector">
+                <p>Stress Level: <span id="stressVal">5</span></p>
                 <input type="range" id="stressLevel" min="1" max="10" value="5">
             </div>
 
-            <div class="input-group">
-                <p class="label">Daily Note:</p>
-                <textarea id="dailyNote" placeholder="How was your day?"></textarea>
+            <div class="note-section">
+                <p>Daily Note:</p>
+                <textarea id="dailyNote" placeholder="Write something..."></textarea>
             </div>
 
-            <button id="saveBtn">Save Record</button>
+            <button id="saveBtn">Save Mood</button>
         </div>
     </div>
 
     <div class="right-panel">
-        <h1 class="main-title">Mood Calendar</h1>
-        
+        <h1 class="calendar-main-title">Mood Calendar</h1>
         <div class="calendar-nav">
-            <button id="prevBtn" class="nav-btn">&lt;</button>
-            <div id="monthDisplay" class="month-label"></div>
-            <button id="nextBtn" class="nav-btn">&gt;</button>
-            <button id="todayBtn" class="today-btn">Today</button>
+            <button id="prevBtn">&lt;</button>
+            <div id="monthDisplay" class="month-title"></div>
+            <button id="nextBtn">&gt;</button>
+            <button id="todayBtn">Today</button>
         </div>
-
-        <div id="calendar" class="calendar-grid"></div>
+        <div id="calendar"></div>
     </div>
 </div>
 
