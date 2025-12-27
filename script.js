@@ -1,31 +1,26 @@
-// ====== 数据初始化 ======
+// ====== 数据结构 ======
+// 使用对象存储，Key 为日期字符串 'YYYY-MM-DD'
 let moodData = JSON.parse(localStorage.getItem("moodData") || "{}");
-let currentViewDate = new Date(); // 当前浏览的月份
-let selectedDateStr = ""; // 当前选中的日期（YYYY-MM-DD）
+
+let currentViewDate = new Date(); // 正在浏览的月
+let selectedDateStr = ""; // 当前选中的日期
 
 const emojis = ['😊', '😐', '☹️', '😡', '😴', '💪'];
 let selectedEmoji = "";
 
-// ====== 页面加载执行 ======
+// ====== 初始化 ======
 document.addEventListener("DOMContentLoaded", () => {
     initEmojiSelector();
     renderCalendar();
 
-    // 绑定导航按钮
     document.getElementById("prevBtn").onclick = () => changeMonth(-1);
     document.getElementById("nextBtn").onclick = () => changeMonth(1);
-    document.getElementById("todayBtn").onclick = goToToday;
-    
-    // 绑定压力条数值显示
-    document.getElementById("stressLevel").oninput = (e) => {
-        document.getElementById("stressVal").innerText = e.target.value;
-    };
-
-    // 绑定保存按钮
+    document.getElementById("todayBtn").onclick = () => { currentViewDate = new Date(); renderCalendar(); };
+    document.getElementById("stressLevel").oninput = (e) => document.getElementById("stressVal").innerText = e.target.value;
     document.getElementById("saveBtn").onclick = saveMood;
 });
 
-// 初始化 Emoji 选择按钮
+// 生成 Emoji 选项
 function initEmojiSelector() {
     const container = document.getElementById("emojiOptions");
     emojis.forEach(e => {
@@ -41,21 +36,11 @@ function initEmojiSelector() {
     });
 }
 
-// 切换月份
 function changeMonth(step) {
     currentViewDate.setMonth(currentViewDate.getMonth() + step);
     renderCalendar();
 }
 
-// 返回今天
-function goToToday() {
-    currentViewDate = new Date();
-    const todayStr = getFormattedDate(currentViewDate);
-    renderCalendar();
-    selectDate(todayStr); // 自动选中今天
-}
-
-// 渲染日历核心函数
 function renderCalendar() {
     const calendar = document.getElementById("calendar");
     const monthDisplay = document.getElementById("monthDisplay");
@@ -64,78 +49,69 @@ function renderCalendar() {
     const year = currentViewDate.getFullYear();
     const month = currentViewDate.getMonth();
     
-    // 计算日期
-    const firstDayIndex = new Date(year, month, 1).getDay();
+    const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const monthName = currentViewDate.toLocaleString('en-US', { month: 'long' });
-    
     monthDisplay.innerText = `${monthName} ${year}`;
 
-    // 1. 渲染星期表头
-    ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(day => {
-        const div = document.createElement("div");
-        div.className = "calendar-header";
-        div.innerText = day;
-        calendar.appendChild(div);
+    // 星期头
+    ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => {
+        const h = document.createElement("div"); h.className = "calendar-header"; h.innerText = d;
+        calendar.appendChild(h);
     });
 
-    // 2. 渲染空白格子 (对齐周几)
-    for (let i = 0; i < firstDayIndex; i++) {
+    // 空格子
+    for (let i = 0; i < firstDay; i++) {
         calendar.appendChild(document.createElement("div"));
     }
 
-    // 3. 渲染每一天
+    // 日期格子
     const today = new Date();
-    const todayStr = getFormattedDate(today);
-
     for (let d = 1; d <= daysInMonth; d++) {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
         const cell = document.createElement("div");
         cell.className = "calendar-day";
-        
-        // 状态标记
         if (dateStr === selectedDateStr) cell.classList.add("active");
-        if (dateStr === todayStr) cell.classList.add("today");
-
-        // 内容：数字 + 表情
-        let content = `<span class="day-num">${d}</span>`;
-        if (moodData[dateStr] && moodData[dateStr].emoji) {
-            content += `<div class="day-mood">${moodData[dateStr].emoji}</div>`;
+        if (year === today.getFullYear() && month === today.getMonth() && d === today.getDate()) {
+            cell.classList.add("today");
         }
 
-        cell.innerHTML = content;
+        cell.innerHTML = `<span class="day-num">${d}</span>`;
+        
+        // 显示已存的心情
+        if (moodData[dateStr]) {
+            const moodIcon = document.createElement("div");
+            moodIcon.className = "day-mood";
+            moodIcon.innerText = moodData[dateStr].emoji;
+            cell.appendChild(moodIcon);
+        }
+
         cell.onclick = () => selectDate(dateStr);
         calendar.appendChild(cell);
     }
 }
 
-// 点击日期选择逻辑
 function selectDate(dateStr) {
     selectedDateStr = dateStr;
     document.getElementById("displayDate").innerText = dateStr;
     
-    // 从缓存中读取该日期的记录，如果没有则重置界面
-    const entry = moodData[dateStr] || { emoji: "", stress: 5, note: "" };
+    // 加载已有数据
+    const data = moodData[dateStr] || { emoji: "", stress: 5, note: "" };
+    selectedEmoji = data.emoji;
+    document.getElementById("stressLevel").value = data.stress;
+    document.getElementById("stressVal").innerText = data.stress;
+    document.getElementById("dailyNote").value = data.note;
     
-    selectedEmoji = entry.emoji;
-    document.getElementById("stressLevel").value = entry.stress;
-    document.getElementById("stressVal").innerText = entry.stress;
-    document.getElementById("dailyNote").value = entry.note;
-    
-    // 更新左侧 Emoji 按钮的高亮状态
-    document.querySelectorAll(".emoji-btn").forEach(btn => {
-        btn.classList.toggle("selected", btn.innerText === selectedEmoji);
+    // 更新 Emoji 按钮状态
+    document.querySelectorAll(".emoji-btn").forEach(b => {
+        b.classList.toggle("selected", b.innerText === selectedEmoji);
     });
 
-    renderCalendar(); // 刷新日历以显示 active 边框
+    renderCalendar(); // 刷新选中状态
 }
 
-// 保存逻辑
 function saveMood() {
-    if (!selectedDateStr) {
-        alert("Please select a day on the calendar first!");
-        return;
-    }
+    if (!selectedDateStr) return alert("Please select a day first!");
     
     moodData[selectedDateStr] = {
         emoji: selectedEmoji,
@@ -144,14 +120,6 @@ function saveMood() {
     };
 
     localStorage.setItem("moodData", JSON.stringify(moodData));
-    alert("Mood recorded for " + selectedDateStr);
+    alert("Mood saved for " + selectedDateStr);
     renderCalendar();
-}
-
-// 辅助函数：格式化日期为 YYYY-MM-DD
-function getFormattedDate(date) {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
 }
