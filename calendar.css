@@ -22,32 +22,94 @@ body {
     z-index: 10;
 }
 
-.side-title { color: #ff8fa3; margin-bottom: 20px; font-size: 1.4rem; border-bottom: 2px solid #fff0f3; padding-bottom: 10px; }
-.selected-date-label { font-weight: bold; color: #888; margin-bottom: 20px; font-size: 0.9rem; }
-.input-group { margin-bottom: 20px; }
-.label { font-size: 0.9rem; margin-bottom: 8px; font-weight: 600; color: #666; }
+.side-title { 
+    color: #ff8fa3; 
+    margin-bottom: 20px; 
+    font-size: 1.4rem; 
+    border-bottom: 2px solid #fff0f3; 
+    padding-bottom: 10px; 
+}
+
+.selected-date-label { 
+    font-weight: bold; 
+    color: #888; 
+    margin-bottom: 20px; 
+    font-size: 0.9rem; 
+}
+
+.input-group { 
+    margin-bottom: 20px; 
+}
+
+.label { 
+    font-size: 0.9rem; 
+    margin-bottom: 8px; 
+    font-weight: 600; 
+    color: #666; 
+}
 
 /* Emoji 选择器 */
-.emoji-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-.emoji-btn {
-    font-size: 1.4rem; cursor: pointer; border: 2px solid #eee;
-    background: none; border-radius: 10px; padding: 5px; transition: 0.2s;
+.emoji-grid { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px; 
 }
-.emoji-btn:hover { background: #fff0f3; border-color: #ff8fa3; }
-.emoji-btn.selected { border-color: #ff8fa3; background: #fff0f3; transform: scale(1.1); }
+
+.emoji-btn {
+    font-size: 1.4rem; 
+    cursor: pointer; 
+    border: 2px solid #eee;
+    background: none; 
+    border-radius: 10px; 
+    padding: 5px; 
+    transition: 0.2s;
+}
+
+.emoji-btn:hover { 
+    background: #fff0f3; 
+    border-color: #ff8fa3; 
+}
+
+.emoji-btn.selected { 
+    border-color: #ff8fa3; 
+    background: #fff0f3; 
+    transform: scale(1.1); 
+}
 
 /* 输入控件 */
-input[type="range"] { width: 100%; accent-color: #ff8fa3; cursor: pointer; }
+input[type="range"] { 
+    width: 100%; 
+    accent-color: #ff8fa3; 
+    cursor: pointer; 
+}
+
 textarea {
-    width: 100%; height: 120px; padding: 12px; border: 1px solid #eee;
-    border-radius: 10px; resize: none; box-sizing: border-box; font-family: inherit; font-size: 0.9rem;
+    width: 100%; 
+    height: 120px; 
+    padding: 12px; 
+    border: 1px solid #eee;
+    border-radius: 10px; 
+    resize: none; 
+    box-sizing: border-box; 
+    font-family: inherit; 
+    font-size: 0.9rem;
 }
 
 #saveBtn {
-    padding: 12px; background: #ff8fa3; color: white;
-    border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s;
+    padding: 12px; 
+    background: #ff8fa3; 
+    color: white;
+    border: none; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    transition: 0.3s;
 }
-#saveBtn:hover { background: #ff758f; box-shadow: 0 4px 12px rgba(255,143,163,0.3); }
+
+#saveBtn:hover { 
+    background: #ff758f; 
+    box-shadow: 0 4px 12px rgba(255,143,163,0.3); 
+}
 
 /* 右侧主面板 */
 .right-panel {
@@ -55,16 +117,16 @@ textarea {
     padding: 30px 50px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 确保子元素在交叉轴上居中 */
+    align-items: center;
 }
 
 /* 修复：Mood Calendar 标题居中 */
 .main-title {
-    width: 100%;             /* 占据全部宽度 */
-    text-align: center;      /* 文字水平居中 */
+    width: 100%;
+    text-align: center;
     color: #ff8fa3;
     font-size: 2.2rem;
-    margin: 0 0 25px 0;      /* 去掉默认左右 margin，防止偏移 */
+    margin: 0 0 25px 0;
     display: block;
 }
 
@@ -77,10 +139,38 @@ textarea {
     margin-bottom: 25px;
     width: 100%;
 }
-.month-label { font-size: 1.4rem; font-weight: bold; min-width: 200px; text-align: center; color: #555; }
-.nav-btn { background: white; border: 1px solid #eee; padding: 5px 15px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; }
-.nav-btn:hover { background: #fff0f3; color: #ff8fa3; }
-.today-btn { background: #ff8fa3; color: white; border: none; padding: 6px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+
+.month-label { 
+    font-size: 1.4rem; 
+    font-weight: bold; 
+    min-width: 200px; 
+    text-align: center; 
+    color: #555; 
+}
+
+.nav-btn { 
+    background: white; 
+    border: 1px solid #eee; 
+    padding: 5px 15px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 1.1rem; 
+}
+
+.nav-btn:hover { 
+    background: #fff0f3; 
+    color: #ff8fa3; 
+}
+
+.today-btn { 
+    background: #ff8fa3; 
+    color: white; 
+    border: none; 
+    padding: 6px 15px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
 
 /* 日历网格 */
 #calendar {
@@ -91,12 +181,19 @@ textarea {
     padding: 25px;
     border-radius: 25px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.03);
-    width: 100%;             /* 宽度铺满父容器 */
-    max-width: 900px;        /* 限制最大宽度，防止在大屏幕上拉得太稀疏 */
+    width: 100%;
+    max-width: 900px;
     box-sizing: border-box;
 }
 
-.calendar-header { text-align: center; font-weight: bold; color: #d1d1d1; font-size: 0.8rem; text-transform: uppercase; padding-bottom: 10px; }
+.calendar-header { 
+    text-align: center; 
+    font-weight: bold; 
+    color: #d1d1d1; 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+    padding-bottom: 10px; 
+}
 
 /* 日期格子 */
 .calendar-day {
@@ -118,9 +215,18 @@ textarea {
     z-index: 5;
 }
 
-.calendar-day.active { border: 2.5px solid #ff8fa3; background: white; }
-.calendar-day.today { background: #fff0f3; }
-.calendar-day.today .day-num { color: #ff8fa3; }
+.calendar-day.active { 
+    border: 2.5px solid #ff8fa3; 
+    background: white; 
+}
+
+.calendar-day.today { 
+    background: #fff0f3; 
+}
+
+.calendar-day.today .day-num { 
+    color: #ff8fa3; 
+}
 
 .day-num {
     position: absolute;
