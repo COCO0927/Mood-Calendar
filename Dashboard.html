@@ -4,25 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealMind | Stress Analysis</title>
+    <title>HealthMan | Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 
 <body>
-    <!-- container for centering -->
     <div class="MainContainer">
-        <!-- header and title -->
+        <!-- Header -->
         <header class="HeaderArea">
-            <h1 class="MainTitle TextGradient">HEALMIND INTELLIGENCE</h1>
+            <h1 class="MainTitle TextGradient">HEALTHMAN DASHBOARD</h1>
             <p class="SubTitleText">Real-time Bio-metric Stress Analysis & Trends</p>
         </header>
 
         <!-- Top Metrics Grid -->
         <div class="MetricsGrid">
-            <!-- Current Status -->
             <div class="GlassPanel">
                 <p class="MetricLabel">Current Status</p>
                 <div class="FlexCenterBetween">
@@ -31,7 +29,6 @@
                 <p id="time-subtext" class="MetricSubtext">Initializing live feed...</p>
             </div>
 
-            <!-- Stress Probability -->
             <div class="GlassPanel">
                 <p class="MetricLabel">Stress Probability</p>
                 <div class="FlexCenterBetween">
@@ -41,7 +38,6 @@
                 <p class="MetricSubtext SubTitleText">Confidence level of AI model</p>
             </div>
 
-            <!-- Daily Average -->
             <div class="GlassPanel">
                 <p class="MetricLabel">Peak Stress</p>
                 <div class="FlexCenterBetween">
@@ -58,17 +54,12 @@
             <p id="advice-text" class="AdviceText">Collecting data to generate insights...</p>
         </div>
 
-        <!-- Mood Diary Navigation Card -->
-<div class="GlassPanel LargeMarginBottom">
-    <h3 class="MetricLabel BlueText">Mood Diary</h3>
-    <p class="MetricSubtext">
-        Track your daily emotions using emoji-based mood logging.
-    </p>
-    <button id="openMoodDiary" class="today-btn" style="margin-top:15px;">
-        Open Mood Calendar
-    </button>
-</div>
-        
+        <!-- Mood Diary Card -->
+        <div class="GlassPanel LargeMarginBottom">
+            <h3 class="MetricLabel BlueText">Mood Diary</h3>
+            <p class="MetricSubtext">Track your daily emotions using emoji-based mood logging.</p>
+            <button id="openMoodDiary" class="today-btn" style="margin-top:15px;">Open Mood Calendar</button>
+        </div>
 
         <!-- Charts Grid -->
         <div class="ChartsGrid">
@@ -88,8 +79,7 @@
         </div>
     </div>
 
-    <!-- Firebase & Logic Shim -->
-    <script type="module" src="script.js"></script>
+    <script type="module" src="dashboard.js"></script>
 </body>
 
 </html>
