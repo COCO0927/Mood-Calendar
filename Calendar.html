@@ -1,52 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Mood Calendar</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Mood Calendar</title>
+<link rel="stylesheet" href="mood-calendar.css">
 </head>
 <body>
 <div class="layout">
     <div class="left-panel">
+        <button onclick="window.location.href='dashboard.html'" style="margin-bottom:15px; background:#eee; border:none; padding:8px; border-radius:8px; cursor:pointer;">← Back to Dashboard</button>
         <h2 class="side-title">Mood Entry</h2>
         <div id="editor-section">
             <p class="selected-date-label">Date: <span id="displayDate">Select a day</span></p>
-            
             <div class="input-group">
                 <p class="label">How are you feeling?</p>
-                <div id="emojiOptions" class="emoji-grid">
-                    </div>
+                <div id="emojiOptions" class="emoji-grid"></div>
             </div>
-
             <div class="input-group">
                 <p class="label">Stress Level: <span id="stressVal">5</span></p>
                 <input type="range" id="stressLevel" min="1" max="10" value="5">
             </div>
-
             <div class="input-group">
                 <p class="label">Daily Note:</p>
                 <textarea id="dailyNote" placeholder="How was your day?"></textarea>
             </div>
-
             <button id="saveBtn">Save Record</button>
         </div>
     </div>
 
     <div class="right-panel">
         <h1 class="main-title">Mood Calendar</h1>
-        
         <div class="calendar-nav">
             <button id="prevBtn" class="nav-btn">&lt;</button>
             <div id="monthDisplay" class="month-label"></div>
             <button id="nextBtn" class="nav-btn">&gt;</button>
             <button id="todayBtn" class="today-btn">Today</button>
         </div>
-
         <div id="calendar" class="calendar-grid"></div>
     </div>
 </div>
-
-<script src="script.js"></script>
+<script type="module" src="mood-calendar.js"></script>
 </body>
 </html>
