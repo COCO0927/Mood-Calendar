@@ -244,3 +244,12 @@ onSnapshot(q, (snapshot) => {
         statusEl.classList.add('DangerText');
     }
 });
+
+// navigate to mood diary module
+const moodBtn = document.getElementById("openMoodDiary");
+if (moodBtn) {
+    moodBtn.addEventListener("click", () => {
+        window.location.href = "mood-calendar.html";
+    });
+}
+
