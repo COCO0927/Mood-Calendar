@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Mood Calendar</title>
-    <!-- 修改这里：将 style.css 改为 calendar.css -->
     <link rel="stylesheet" href="calendar.css">
 </head>
 <body>
@@ -13,12 +12,11 @@
         <h2 class="side-title">Mood Entry</h2>
         <div id="editor-section">
             <p class="selected-date-label">Date: <span id="displayDate">Select a day</span></p>
-            
+
             <div class="input-group">
                 <p class="label">How are you feeling?</p>
                 <div id="emojiOptions" class="emoji-grid">
-                    <!-- JS 会自动填充 emoji -->
-                </div>
+                    </div>
             </div>
 
             <div class="input-group">
@@ -37,7 +35,7 @@
 
     <div class="right-panel">
         <h1 class="main-title">Mood Calendar</h1>
-        
+
         <div class="calendar-nav">
             <button id="prevBtn" class="nav-btn">&lt;</button>
             <div id="monthDisplay" class="month-label"></div>
@@ -45,11 +43,10 @@
             <button id="todayBtn" class="today-btn">Today</button>
         </div>
 
-        <div id="calendar" class="calendar-grid"></div>
+        <div id="calendar"></div>
     </div>
 </div>
 
-<!-- 修改这里：将 script.js 改为 calendar.js -->
 <script src="calendar.js"></script>
 </body>
 </html>
